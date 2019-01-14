@@ -62,6 +62,15 @@ for i in range(len(loadedJson['tiles-new'][0]['tiles'])):
 	if 'bg' in checkingJson and int(checkingJson['bg']) > startingValue:
 		loadedJson['tiles-new'][0]['tiles'][i]['bg'] += offsetValue
 		offsetBg += 1
+	if 'additional_tiles' in checkingJson:
+		for j in range(len(checkingJson['additional_tiles'])):
+			additionalJson = checkingJson['additional_tiles'][j]
+			if 'fg' in additionalJson and int(additionalJson['fg']) > startingValue:
+				additionalJson['fg'] += offsetValue
+				offsetFg += 1
+			if 'bg' in additionalJson and int(additionalJson['bg']) > startingValue:
+				additionalJson['bg'] += offsetValue
+				offsetBg += 1
 
 ## Save the output.
 outputFile = open(outputFilename, 'w')
