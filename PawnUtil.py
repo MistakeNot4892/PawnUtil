@@ -75,9 +75,11 @@ def main():
 	loadedJson = json.loads(inputFile.read(), object_pairs_hook = OrderedDict)
 	inputFile.close()
 
-	for jsonKey in loadedJson:
-		if 'tiles' in loadedJson[jsonKey][0]:
-			updateFgAndBgValuesInList(loadedJson[jsonKey][0]['tiles'], offsetValue, startingValue)
+	if 'tiles-new' in loadedJson and 'tiles' in loadedJson['tiles-new'][0]:
+		updateFgAndBgValuesInList(loadedJson['tiles-new'][0]['tiles'], offsetValue, startingValue)
+	else:
+		print("Malformed JSON in input file, check your tile data.")
+		sys.exit()
 
 	## Save the output.
 	outputFile = open(outputFilename, 'w')
